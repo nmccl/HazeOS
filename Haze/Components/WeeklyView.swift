@@ -18,7 +18,7 @@ struct WeeklyView: View {
                     Text("Mon")
                 } else {
                     Text("Mon")
-                        .padding(6)
+                        .padding(.horizontal, 6)
                         .background(
                             RoundedRectangle(cornerRadius: 1)
                                 .fill(Color.gray.opacity(0.3))
@@ -27,30 +27,31 @@ struct WeeklyView: View {
             }
             VStack(spacing: 10){
                 Image(systemName:"sun.dust")
-                    .font(.system(size: 25))
+                    .font(.system(size: 24))
                 Text("Tues")
             }
             VStack(spacing: 10){
                 Image(systemName:"sun.haze")
-                    .font(.system(size: 25))
+                    .font(.system(size: 24))
                 Text("Wed")
             }
             VStack(spacing: 10){
                 Image(systemName:"cloud.rain")
-                    .font(.system(size: 25))
+                    .font(.system(size: 24))
                 Text("Thur")
             }
             VStack(spacing: 10){
                 Image(systemName:"cloud.rain")
-                    .font(.system(size: 25))
+                    .font(.system(size: 24))
                 Text("Fri")
             }
             VStack(spacing: 10){
                 Image(systemName:"cloud.sun")
-                    .font(.system(size: 25))
+                    .font(.system(size: 24))
                 Text("Sat")
             }
         }
+        
     }
 }
 

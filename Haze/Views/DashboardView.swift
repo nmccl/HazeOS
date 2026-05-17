@@ -6,8 +6,13 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct DashboardView: View {
+    @State private var condition: AppWeatherCondition? = nil
+
+    @EnvironmentObject var locationFetcher: LocationFetcher
+
     var body: some View {
         ZStack {
             // Hazy weather gradient background
@@ -24,12 +29,13 @@ struct DashboardView: View {
 
             // Existing content
             VStack {
-                HStack(alignment: .firstTextBaseline){
+                HStack(alignment: .firstTextBaseline) {
                     CurrentWeather()
                         .padding(40)
-                        //.padding(.trailing, 180)
                 }
-                WeatherType()
+                if let condition {
+                    WeatherType(condition: condition)
+                }
                 Spacer()
                 City()
                     .padding()
@@ -37,9 +43,24 @@ struct DashboardView: View {
                 Spacer()
             }
         }
+        .task(id: locationFetcher.location) {
+            guard let loc = locationFetcher.location else { return }
+            await loadCondition(for: loc)
+        }
+    }
+
+    private func loadCondition(for location: CLLocation) async {
+        do {
+            let result = try await getWeather(for: location)
+            condition = result.condition
+            print("Condition loaded:", result.condition.rawValue)
+        } catch {
+            print("Failed to load condition:", error)
+        }
     }
 }
 
 #Preview {
     DashboardView()
+        .environmentObject(LocationFetcher())
 }
