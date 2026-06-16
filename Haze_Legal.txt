@@ -1,0 +1,370 @@
+================================================================================
+                         HAZE — PRIVACY POLICY & TERMS OF USE
+================================================================================
+Last Updated: June 13, 2026
+Developer: Noah McClung
+Contact: contact.silencedev@gmail.com
+Application: Haze (iOS Weather App)
+================================================================================
+
+
+================================================================================
+                              PRIVACY POLICY
+================================================================================
+
+1. INTRODUCTION
+
+This Privacy Policy describes how Haze ("the App," "we," "our," or "us"),
+developed by Noah McClung, handles information when you use the Haze iOS
+weather application. We are committed to protecting your privacy. Haze is
+designed to collect only what is strictly necessary to provide weather
+information, and no personal data is collected, stored, or sold by us.
+
+By using Haze, you agree to the practices described in this Privacy Policy.
+
+
+2. INFORMATION WE COLLECT
+
+2.1 Location Data
+
+Haze requests access to your device's location through Apple's CoreLocation
+framework. Location data is used solely to fetch current weather conditions
+and forecasts for your present position. Specifically:
+
+  - When you grant "While Using the App" location permission, your device's
+    GPS coordinates are passed directly to Apple's WeatherKit service to
+    retrieve weather data.
+  - Your location coordinates are never stored by us, never transmitted to our
+    servers (we operate no servers), and never shared with any third party
+    other than Apple's WeatherKit service as described in Section 4 below.
+  - You may also manually search for and select a city instead of sharing your
+    device location. In that case, no GPS coordinates are accessed.
+
+2.2 City Search Queries
+
+When you type a city name in the location search feature, your search text is
+passed to Apple's MapKit framework (MKLocalSearchCompleter) to generate
+autocomplete suggestions. We do not log, store, or transmit your search
+queries to any server we operate.
+
+2.3 Information We Do NOT Collect
+
+Haze does not collect, process, or store:
+  - Your name, email address, or any account information
+  - Browsing history or usage analytics
+  - Advertising identifiers (IDFA)
+  - Device identifiers or fingerprinting data
+  - Crash reports or diagnostic data sent to our servers
+  - Payment or financial information
+  - Any data from your contacts, photos, microphone, or camera
+
+We do not use any third-party analytics SDKs, advertising networks, or
+tracking libraries.
+
+
+3. HOW WE USE INFORMATION
+
+The only data Haze processes is your device location (when permitted), and it
+is used exclusively to:
+
+  - Fetch real-time weather conditions for your current position via Apple
+    WeatherKit
+  - Display a 5-day weather forecast for your current position
+
+Location data is used in-memory only for the duration of the weather request
+and is discarded immediately after the response is received.
+
+
+4. THIRD-PARTY SERVICES
+
+Haze relies on the following Apple-provided services, each governed by Apple's
+own Privacy Policy (https://www.apple.com/legal/privacy/):
+
+  - Apple WeatherKit: Receives your device coordinates to return weather data.
+    WeatherKit is subject to Apple's WeatherKit terms and privacy practices.
+  - Apple MapKit / MKLocalSearchCompleter: Processes city search text to
+    return location suggestions. This service is governed by Apple's privacy
+    practices.
+
+We have no control over, and assume no responsibility for, the content,
+privacy policies, or practices of Apple's services. We encourage you to review
+Apple's Privacy Policy.
+
+No other third-party services, SDKs, or APIs are integrated into Haze.
+
+
+5. DATA RETENTION
+
+We do not retain any personal data. Because Haze operates without a backend
+server or database, no information about you or your usage is stored anywhere
+by us. All location lookups are stateless and ephemeral.
+
+
+6. DATA SHARING AND SALE
+
+We do not sell, trade, rent, or otherwise transfer your information to any
+third party. The only data transmission that occurs is the passing of your
+device location to Apple WeatherKit, as described above, which is necessary
+for the core function of the App.
+
+
+7. CHILDREN'S PRIVACY
+
+Haze is not directed at children under the age of 13. We do not knowingly
+collect personal information from children under 13. If you believe a child
+under 13 has provided personal information through the App, please contact us
+at contact.silencedev@gmail.com and we will take steps to address the matter.
+
+
+8. YOUR PRIVACY RIGHTS AND CHOICES
+
+8.1 Location Permission
+
+You can grant or revoke location access at any time through your device
+Settings > Privacy & Security > Location Services > Haze. Revoking location
+access will not affect your ability to use the App; you may still manually
+search for any city.
+
+8.2 California Residents (CCPA)
+
+Because Haze does not collect personal information as defined under the
+California Consumer Privacy Act (CCPA), there is no personal information to
+access, delete, or opt out of selling. We do not sell personal information.
+
+8.3 European Residents (GDPR)
+
+Because Haze does not collect or store personal data, the General Data
+Protection Regulation (GDPR) obligations related to data access, deletion, and
+portability do not apply to data held by us. To the extent Apple processes your
+location data via WeatherKit on our behalf, Apple acts as a data processor
+subject to GDPR. Please refer to Apple's Privacy Policy for details.
+
+
+9. DATA SECURITY
+
+Although we do not store any of your data, we take reasonable measures to
+ensure the App transmits data securely using Apple's native networking
+frameworks, which enforce HTTPS/TLS for all communications.
+
+
+10. ATTRIBUTION
+
+Weather data in Haze is provided by Apple Weather. Please note that WeatherKit
+requires acknowledgment of Apple as the data source in apps distributed on the
+App Store.
+
+
+11. CHANGES TO THIS PRIVACY POLICY
+
+We may update this Privacy Policy from time to time. When we do, we will
+update the "Last Updated" date at the top of this document and post the
+revised policy on our website. Continued use of the App after any changes
+constitutes your acceptance of the updated Privacy Policy.
+
+
+12. CONTACT US
+
+If you have any questions, concerns, or requests regarding this Privacy Policy,
+please contact:
+
+  Noah McClung
+  Email: contact.silencedev@gmail.com
+
+We will respond to your inquiry as soon as reasonably practicable.
+
+
+================================================================================
+                              TERMS OF USE
+================================================================================
+
+1. ACCEPTANCE OF TERMS
+
+By downloading, installing, or using Haze ("the App"), you agree to be bound
+by these Terms of Use ("Terms"). If you do not agree to these Terms, do not
+use the App. These Terms constitute a legally binding agreement between you
+("User") and Noah McClung ("Developer," "we," "our," or "us").
+
+
+2. LICENSE
+
+Subject to these Terms, we grant you a limited, non-exclusive, non-transferable,
+revocable license to download and use Haze on any Apple-branded device that
+you own or control, solely for your personal, non-commercial purposes.
+
+This license does not include:
+  - Reproducing, distributing, or publicly displaying the App or its contents
+  - Modifying, reverse engineering, decompiling, or disassembling the App
+  - Using the App for any commercial purpose or for any public display
+  - Removing any proprietary notices or labels from the App
+  - Using the App in any manner that could damage, disable, or impair it
+
+
+3. APPLE APP STORE TERMS
+
+Your use of Haze is also subject to the Apple Media Services Terms and
+Conditions. In the event of a conflict between these Terms and the Apple Media
+Services Terms and Conditions, the Apple Media Services Terms and Conditions
+will govern with respect to App Store-specific matters. Apple is not a party
+to these Terms and has no obligation to provide any support or maintenance for
+Haze.
+
+
+4. WEATHER DATA AND ACCURACY
+
+4.1 Haze provides weather data sourced from Apple WeatherKit. Weather
+information is provided for general informational purposes only.
+
+4.2 We do not guarantee the accuracy, completeness, timeliness, or reliability
+of any weather data displayed in the App. Weather conditions can change rapidly
+and forecasts are inherently uncertain.
+
+4.3 You should not rely solely on Haze for decisions that could affect your
+safety or wellbeing, including but not limited to travel decisions, outdoor
+activities in extreme conditions, emergency preparedness, or agricultural
+planning. Always consult official weather services and local authorities in
+situations involving safety.
+
+4.4 We expressly disclaim all liability for any loss, injury, or damage
+arising from your reliance on weather information provided by the App.
+
+
+5. LOCATION SERVICES
+
+5.1 Haze may request access to your device's location to provide localized
+weather information. You may choose to grant or deny this permission at any
+time in your device settings.
+
+5.2 By granting location permission, you consent to your device's approximate
+or precise location being passed to Apple WeatherKit for the purpose of
+retrieving weather data.
+
+5.3 You acknowledge that location-based features may not function correctly
+if location access is denied.
+
+
+6. INTELLECTUAL PROPERTY
+
+6.1 The App, including all its design elements, illustrations, graphics,
+user interface, code, and content (excluding third-party weather data), is
+owned by Noah McClung and is protected by applicable intellectual property laws.
+
+6.2 All rights not expressly granted in these Terms are reserved.
+
+6.3 You may not use any of our trademarks, trade names, service marks, logos,
+or other branding without our prior written consent.
+
+
+7. THIRD-PARTY SERVICES
+
+The App uses Apple WeatherKit and Apple MapKit. Your use of those services is
+subject to Apple's terms and policies. We are not responsible for the
+availability, content, or practices of any third-party services.
+
+
+8. DISCLAIMER OF WARRANTIES
+
+THE APP IS PROVIDED "AS IS" AND "AS AVAILABLE," WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, WE
+DISCLAIM ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO:
+
+  - WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+    NON-INFRINGEMENT
+  - WARRANTIES THAT THE APP WILL BE UNINTERRUPTED, ERROR-FREE, OR FREE OF
+    VIRUSES OR OTHER HARMFUL COMPONENTS
+  - WARRANTIES REGARDING THE ACCURACY, RELIABILITY, OR COMPLETENESS OF ANY
+    WEATHER DATA OR OTHER CONTENT IN THE APP
+
+Some jurisdictions do not allow the exclusion of implied warranties, so the
+above exclusions may not apply to you.
+
+
+9. LIMITATION OF LIABILITY
+
+TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL NOAH
+McCLUNG BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL,
+PUNITIVE, OR EXEMPLARY DAMAGES, INCLUDING BUT NOT LIMITED TO DAMAGES FOR LOSS
+OF PROFITS, GOODWILL, DATA, OR OTHER INTANGIBLE LOSSES, ARISING OUT OF OR
+IN CONNECTION WITH:
+
+  - YOUR USE OF OR INABILITY TO USE THE APP
+  - INACCURATE WEATHER DATA OR FORECASTS
+  - ANY ERRORS OR OMISSIONS IN THE APP'S CONTENT
+  - ANY ACTIONS TAKEN IN RELIANCE ON THE APP'S INFORMATION
+
+OUR TOTAL LIABILITY TO YOU FOR ALL CLAIMS ARISING FROM OR RELATED TO THE APP
+SHALL NOT EXCEED THE AMOUNT YOU PAID FOR THE APP (IF ANY) IN THE TWELVE (12)
+MONTHS PRECEDING THE CLAIM.
+
+
+10. INDEMNIFICATION
+
+You agree to indemnify, defend, and hold harmless Noah McClung from and against
+any claims, liabilities, damages, losses, and expenses (including reasonable
+attorney's fees) arising out of or in connection with your use of the App, your
+violation of these Terms, or your violation of any third-party rights.
+
+
+11. MODIFICATIONS TO THE APP AND TERMS
+
+11.1 We reserve the right to modify, suspend, or discontinue the App (or any
+feature thereof) at any time, with or without notice, and without liability to
+you.
+
+11.2 We reserve the right to update these Terms at any time. We will indicate
+the date of the last update at the top of this document. Your continued use of
+the App following any changes to the Terms constitutes your acceptance of the
+revised Terms.
+
+11.3 It is your responsibility to review these Terms periodically.
+
+
+12. TERMINATION
+
+We may terminate or suspend your access to the App at any time, without prior
+notice or liability, for any reason, including if you breach these Terms. Upon
+termination, your right to use the App will immediately cease. All provisions
+of these Terms that by their nature should survive termination shall survive.
+
+
+13. GOVERNING LAW AND DISPUTE RESOLUTION
+
+13.1 These Terms shall be governed by and construed in accordance with the laws
+of the State of Tennessee, United States, without regard to its conflict of law
+provisions.
+
+13.2 Any dispute arising out of or relating to these Terms or the App shall
+be resolved through binding arbitration in accordance with the American
+Arbitration Association's Consumer Arbitration Rules, except that either party
+may seek injunctive or other equitable relief in a court of competent
+jurisdiction.
+
+13.3 You waive any right to participate in a class action lawsuit or class-wide
+arbitration against us.
+
+
+14. SEVERABILITY
+
+If any provision of these Terms is found to be unenforceable or invalid under
+applicable law, that provision shall be limited or eliminated to the minimum
+extent necessary, and the remaining provisions shall continue in full force and
+effect.
+
+
+15. ENTIRE AGREEMENT
+
+These Terms, together with our Privacy Policy, constitute the entire agreement
+between you and Noah McClung with respect to Haze and supersede all prior or
+contemporaneous understandings or agreements regarding the App.
+
+
+16. CONTACT
+
+If you have any questions about these Terms of Use, please contact:
+
+  Noah McClung
+  Email: contact.silencedev@gmail.com
+
+
+================================================================================
+                         END OF DOCUMENT
+================================================================================

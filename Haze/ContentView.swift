@@ -11,8 +11,8 @@ struct ContentView: View {
     var body: some View {
         TabView {
             DashboardView()
-            AdvancedView()
-            SettingsView()
+//            AdvancedView()
+//            SettingsView()
         }
         .tabViewStyle(.page) // Converts tabs into dots
         .indexViewStyle(.page(backgroundDisplayMode: .never))
