@@ -248,10 +248,18 @@ struct DashboardView: View {
             .safeAreaPadding(.top)
             .padding(.horizontal, 24)
         }
+        .task {
+            locationFetcher.requestCurrentLocation()
+        }
         .task(id: activeLocation) {
             guard let loc = activeLocation else { return }
             await resolveLocation(from: loc)
             await loadWeather(for: loc)
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .seconds(900))
+                guard !Task.isCancelled, let loc = activeLocation else { break }
+                await loadWeather(for: loc, silent: true)
+            }
         }
         .sheet(isPresented: $showLocationSelector) {
             LocationSelectorView(condition: activeCondition) { location in
@@ -261,7 +269,7 @@ struct DashboardView: View {
         }
     }
 
-    private func loadWeather(for location: CLLocation) async {
+    private func loadWeather(for location: CLLocation, silent: Bool = false) async {
         isLoading = true
         weatherLoadFailed = false
         do {
@@ -271,14 +279,18 @@ struct DashboardView: View {
             windDirection = data.windDirection
             forecast = data.forecast
             if !useManualCondition { liveCondition = data.condition }
-            #if canImport(UIKit)
-            UINotificationFeedbackGenerator().notificationOccurred(.success)
-            #endif
+            if !silent {
+                #if canImport(UIKit)
+                UINotificationFeedbackGenerator().notificationOccurred(.success)
+                #endif
+            }
         } catch {
             weatherLoadFailed = true
-            #if canImport(UIKit)
-            UINotificationFeedbackGenerator().notificationOccurred(.error)
-            #endif
+            if !silent {
+                #if canImport(UIKit)
+                UINotificationFeedbackGenerator().notificationOccurred(.error)
+                #endif
+            }
             print("Failed to load weather:", error)
         }
         isLoading = false
@@ -354,5 +366,5 @@ struct DashboardView: View {
 
 #Preview {
     DashboardView()
-        .environmentObject(LocationFetcher())
+        .environmentObject(LocationFetcher(requestsAuthorization: false))
 }

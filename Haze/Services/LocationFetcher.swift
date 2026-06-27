@@ -15,22 +15,41 @@ final class LocationFetcher: NSObject, ObservableObject, CLLocationManagerDelega
 
     private let manager = CLLocationManager()
 
-    override init() {
+    init(requestsAuthorization: Bool = false) {
         super.init()
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyKilometer
-        manager.requestWhenInUseAuthorization()
+        authorizationStatus = manager.authorizationStatus
+
+        if requestsAuthorization {
+            requestCurrentLocation()
+        }
+    }
+
+    func requestCurrentLocation() {
+        authorizationStatus = manager.authorizationStatus
+
+        switch authorizationStatus {
+        case .notDetermined:
+            #if os(macOS)
+            manager.requestLocation()
+            #else
+            manager.requestWhenInUseAuthorization()
+            #endif
+        case .authorizedWhenInUse, .authorizedAlways:
+            manager.requestLocation()
+        case .denied, .restricted:
+            break
+        @unknown default:
+            break
+        }
     }
 
     nonisolated func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         let status = manager.authorizationStatus
         Task { @MainActor in
             self.authorizationStatus = status
-            #if os(macOS)
-            let authorized = status == .authorizedAlways
-            #else
             let authorized = status == .authorizedWhenInUse || status == .authorizedAlways
-            #endif
             if authorized { self.manager.requestLocation() }
         }
     }

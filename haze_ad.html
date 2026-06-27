@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Introducing Haze</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .stage-wrapper {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+    }
+
+    .stage {
+      width: 1920px;
+      height: 1080px;
+      position: relative;
+      overflow: hidden;
+      background: #000;
+      transform-origin: center center;
+      flex-shrink: 0;
+    }
+
+    /* ── STAGE BACKGROUND ── */
+    .stage-bg {
+      position: absolute;
+      inset: 0;
+      background: #F4EFE6;
+      animation: stageBg 20s ease-in-out both;
+      will-change: opacity;
+    }
+    @keyframes stageBg {
+      0%   { opacity: 0; }
+      5%   { opacity: 1; }
+      92%  { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    /* ── SCENE 1: App Icon  0.6s → 5.1s ── */
+    .scene-icon {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: sceneIcon 4.5s 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      will-change: opacity, transform;
+    }
+    @keyframes sceneIcon {
+      0%   { opacity: 0; transform: scale(0.93); }
+      18%  { opacity: 1; transform: scale(1); }
+      68%  { opacity: 1; transform: scale(1); }
+      88%  { opacity: 0; transform: scale(1.04); }
+      100% { opacity: 0; }
+    }
+
+    .app-icon-wrap {
+      width: 200px;
+      height: 200px;
+      border-radius: 45px;
+      overflow: hidden;
+    }
+    .app-icon-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── SCENE 2: Title text  4.5s → 9.0s ── */
+    .scene-title {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: sceneTitle 4.5s 4.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      will-change: opacity, transform;
+    }
+    @keyframes sceneTitle {
+      0%   { opacity: 0; transform: translateY(16px); }
+      20%  { opacity: 1; transform: translateY(0); }
+      72%  { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-10px); }
+    }
+
+    .title-intro {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: 13px;
+      color: rgba(26,26,26,0.38);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .title-name {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 210px;
+      font-weight: 700;
+      color: #1A1A1A;
+      letter-spacing: -5px;
+      line-height: 0.9;
+    }
+
+    /* ── SCENE 3: Phone mockup  8.5s → 17.5s ── */
+    .scene-phone {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 110px;
+      animation: scenePhone 9s 8.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      will-change: opacity;
+    }
+    @keyframes scenePhone {
+      0%   { opacity: 0; }
+      11%  { opacity: 1; }
+      80%  { opacity: 1; }
+      97%  { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    /* left copy */
+    .phone-copy {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      animation: phoneCopy 9s 8.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      will-change: opacity, transform;
+    }
+    @keyframes phoneCopy {
+      0%   { opacity: 0; transform: translateX(-26px); }
+      16%  { opacity: 1; transform: translateX(0); }
+      80%  { opacity: 1; }
+      97%  { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    .copy-h {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 64px;
+      font-weight: 700;
+      color: #1A1A1A;
+      line-height: 1.06;
+      letter-spacing: -0.5px;
+      margin-bottom: 26px;
+    }
+    .copy-sub {
+      font-family: Georgia, serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 4.5px;
+      color: rgba(26,26,26,0.38);
+      text-transform: uppercase;
+    }
+
+    /* phone frame */
+    .phone-frame {
+      width: 340px;
+      height: 736px;
+      background: #111;
+      border-radius: 52px;
+      padding: 10px;
+      position: relative;
+      flex-shrink: 0;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.07) inset,
+        0 50px 120px rgba(0,0,0,0.18),
+        0 10px 30px rgba(0,0,0,0.10);
+      animation: phoneFrame 9s 8.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      will-change: opacity, transform;
+    }
+    @keyframes phoneFrame {
+      0%   { opacity: 0; transform: translateY(32px) scale(0.97); }
+      14%  { opacity: 1; transform: translateY(0) scale(1); }
+      80%  { opacity: 1; transform: translateY(0) scale(1); }
+      97%  { opacity: 0; transform: translateY(-8px); }
+      100% { opacity: 0; }
+    }
+
+    .phone-screen {
+      width: 100%; height: 100%;
+      border-radius: 44px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .dynamic-island {
+      position: absolute;
+      top: 13px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 108px;
+      height: 33px;
+      background: #000;
+      border-radius: 17px;
+      z-index: 20;
+    }
+
+    /* weather states */
+    .w-state {
+      position: absolute;
+      inset: 0;
+      will-change: opacity;
+    }
+
+    .w-state--clear {
+      animation: wClear 9s 8.5s ease-in-out both;
+    }
+    @keyframes wClear {
+      0%   { opacity: 0; }
+      13%  { opacity: 1; }
+      40%  { opacity: 1; }
+      53%  { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    .w-state--rainy {
+      animation: wRainy 9s 8.5s ease-in-out both;
+    }
+    @keyframes wRainy {
+      0%   { opacity: 0; }
+      40%  { opacity: 0; }
+      53%  { opacity: 1; }
+      82%  { opacity: 1; }
+      97%  { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    .w-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* weather content layout */
+    .w-content {
+      position: absolute;
+      inset: 0;
+      padding: 54px 20px 18px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wh {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .wh-date {
+      font-family: Georgia, serif;
+      font-size: 8.5px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: rgba(26,26,26,0.85);
+    }
+    .wh-scope {
+      font-size: 16px;
+      color: rgba(26,26,26,0.55);
+      letter-spacing: 0;
+    }
+
+    .w-city {
+      font-family: Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #1A1A1A;
+      margin-top: 7px;
+    }
+    .w-region {
+      font-family: Georgia, serif;
+      font-size: 8px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(26,26,26,0.85);
+      margin-top: 3px;
+    }
+
+    .w-temp-wrap {
+      display: flex;
+      align-items: flex-start;
+      margin-top: 12px;
+    }
+    .w-temp {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+      font-size: 88px;
+      font-weight: 100;
+      line-height: 1;
+      color: #1A1A1A;
+    }
+    .w-deg {
+      font-family: Georgia, serif;
+      font-size: 30px;
+      font-weight: 300;
+      color: #1A1A1A;
+      margin-top: 12px;
+      margin-left: 2px;
+    }
+
+    .w-cond {
+      font-family: Georgia, serif;
+      font-size: 10px;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: #1A1A1A;
+      margin-top: 2px;
+    }
+
+    .w-pill {
+      display: inline-block;
+      font-family: Georgia, serif;
+      font-size: 7.5px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 6px 8px;
+      border: 0.6px solid rgba(26,26,26,0.5);
+      border-radius: 3px;
+      color: rgba(26,26,26,0.85);
+      margin-top: 16px;
+      align-self: flex-start;
+    }
+
+    .w-wind {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .w-wind-ring {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 0.8px solid rgba(26,26,26,0.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #1A1A1A;
+      flex-shrink: 0;
+    }
+    .w-wind-num {
+      font-family: Georgia, serif;
+      font-size: 16px;
+      color: #1A1A1A;
+    }
+    .w-wind-unit {
+      font-family: Georgia, serif;
+      font-size: 7px;
+      color: rgba(26,26,26,0.85);
+      margin-left: 2px;
+    }
+    .w-wind-dir {
+      font-family: Georgia, serif;
+      font-size: 8px;
+      letter-spacing: 1px;
+      color: rgba(26,26,26,0.85);
+      display: block;
+      margin-top: 1px;
+    }
+
+    .w-push { flex: 1; min-height: 0; }
+
+    .w-hr {
+      height: 0.5px;
+      background: rgba(26,26,26,0.85);
+      margin-bottom: 11px;
+    }
+
+    .w-week {
+      display: flex;
+      padding-bottom: 6px;
+    }
+    .w-day {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .w-day-name {
+      font-family: Georgia, serif;
+      font-size: 7px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: rgba(26,26,26,0.85);
+    }
+    .w-day-name.active {
+      color: #1A1A1A;
+      font-weight: 500;
+    }
+    .w-day-icon {
+      width: 26px; height: 26px;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+    }
+    .w-day-hi {
+      font-family: Georgia, serif;
+      font-size: 8.5px;
+      color: #1A1A1A;
+    }
+    .w-day-hi.active { font-weight: 500; }
+    .w-day-lo {
+      font-family: Georgia, serif;
+      font-size: 8.5px;
+      color: rgba(26,26,26,0.7);
+    }
+
+    /* ── SCENE 4: Final card  17.2s → 20.2s ── */
+    .scene-final {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: sceneFinal 3.2s 17.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      will-change: opacity, transform;
+    }
+    @keyframes sceneFinal {
+      0%   { opacity: 0; transform: scale(0.97); }
+      22%  { opacity: 1; transform: scale(1); }
+      75%  { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; }
+    }
+
+    .final-icon-wrap {
+      width: 112px; height: 112px;
+      border-radius: 25px;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+    .final-icon-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .final-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 82px;
+      font-weight: 700;
+      color: #1A1A1A;
+      letter-spacing: -1.5px;
+      line-height: 1;
+      margin-bottom: 22px;
+    }
+    .final-cta {
+      font-family: Georgia, serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: rgba(26,26,26,0.38);
+    }
+  </style>
+</head>
+<body>
+  <div class="stage-wrapper">
+    <div class="stage" id="stage">
+
+      <div class="stage-bg"></div>
+
+      <!-- SCENE 1: App icon -->
+      <div class="scene-icon">
+        <div class="app-icon-wrap">
+          <img src="Haze/Assets.xcassets/AppIcon.appiconset/AppIcon.png" alt="Haze">
+        </div>
+      </div>
+
+      <!-- SCENE 2: Title -->
+      <div class="scene-title">
+        <span class="title-intro">introducing</span>
+        <span class="title-name">Haze.</span>
+      </div>
+
+      <!-- SCENE 3: Phone mockup -->
+      <div class="scene-phone">
+
+        <div class="phone-copy">
+          <div class="copy-h">Weather,<br>beautifully<br>minimal.</div>
+          <div class="copy-sub">Available on iOS</div>
+        </div>
+
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="dynamic-island"></div>
+
+            <!-- Clear weather -->
+            <div class="w-state w-state--clear">
+              <div class="w-bg" style="background-image:url('Haze/Assets.xcassets/bg_sunny.imageset/Sunny.png');"></div>
+              <div class="w-content">
+                <div class="wh">
+                  <span class="wh-date">FRIDAY, JUN 27</span>
+                  <span class="wh-scope">◎</span>
+                </div>
+                <div class="w-city">NEW YORK</div>
+                <div class="w-region">NEW YORK, USA</div>
+                <div class="w-temp-wrap">
+                  <span class="w-temp">68</span>
+                  <span class="w-deg">°</span>
+                </div>
+                <div class="w-cond">CLEAR</div>
+                <div class="w-pill">Crystal clear skies</div>
+                <div class="w-wind">
+                  <div class="w-wind-ring">↗</div>
+                  <div>
+                    <span class="w-wind-num">12</span><span class="w-wind-unit">mph</span>
+                    <span class="w-wind-dir">SW</span>
+                  </div>
+                </div>
+                <div class="w-push"></div>
+                <div class="w-hr"></div>
+                <div class="w-week">
+                  <div class="w-day">
+                    <span class="w-day-name active">FRI</span>
+                    <img class="w-day-icon" src="Haze/Assets.xcassets/icon_sun.imageset/Sun.png" alt="">
+                    <span class="w-day-hi active">71°</span>
+                    <span class="w-day-lo">56°</span>
+                  </div>
+                  <div class="w-day">
+                    <span class="w-day-name">SAT</span>
+                    <img class="w-day-icon" src="Haze/Assets.xcassets/icon_cloud.imageset/Cloud.png" alt="">
+                    <span class="w-day-hi">65°</span>
+                    <span class="w-day-lo">51°</span>
+                  </div>
+                  <div class="w-day">
+                    <span class="w-day-name">SUN</span>
+                    <img class="w-day-icon" src="Haze/Assets.xcassets/icon_rainy.imageset/Rainy.png" alt="">
+                    <span class="w-day-hi">59°</span>
+                    <span class="w-day-lo">48°</span>
+                  </div>
+                  <div class="w-day">
+                    <span class="w-day-name">MON</span>
+                    <img class="w-day-icon" src="Haze/Assets.xcassets/icon_sun.imageset/Sun.png" alt="">
+                    <span class="w-day-hi">72°</span>
+                    <span class="w-day-lo">58°</span>
+                  </div>
+                  <div class="w-day">
+                    <span class="w-day-name">TUE</span>
+                    <img class="w-day-icon" src="Haze/Assets.xcassets/icon_sun.imageset/Sun.png" alt="">
+                    <span class="w-day-hi">74°</span>
+                    <span class="w-day-lo">60°</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rainy weather -->
+            <div class="w-state w-state--rainy">
+              <div class="w-bg" style="background-image:url('Haze/Assets.xcassets/bg_rainy.imageset/Rainy.png');"></div>
+              <div class="w-content">
+                <div class="wh">
+                  <span class="wh-date">FRIDAY, JUN 27</span>
+                  <span class="wh-scope">◎</span>
+                </div>
+                <div class="w-city">CHICAGO</div>
+                <div class="w-region">ILLINOIS, USA</div>
+                <div class="w-temp-wrap">
+                  <span class="w-temp">54</span>
+                  <span class="w-deg">°</span>
+                </div>
+                <div class="w-cond">RAINY</div>
+                <div class="w-pill">Steady rainfall</div>
+                <div class="w-wind">
+                  <div class="w-wind-ring">↙</div>
+                  <div>
+                    <span class="w-wind-num">18</span><span class="w-wind-unit">mph</span>
+                    <span class="w-wind-dir">NE</span>
+                  </div>
+                </div>
+                <div class="w-push"></div>
+                <div class="w-hr"></div>
+                <div class="w-week">
+                  <div class="w-day">
+                    <span class="w-day-name active">FRI</span>
+                    <img class="w-day-icon" src="Haze/Assets.xcassets/icon_rainy.imageset/Rainy.png" alt="">
+                    <span class="w-day-hi active">56°</span>
+                    <span class="w-day-lo">44°</span>
+                  </div>
+                  <div class="w-day">
+                    <span class="w-day-name">SAT</span>
+                    <img class="w-day-icon" src="Haze/Assets.xcassets/icon_rainy.imageset/Rainy.png" alt="">
+                    <span class="w-day-hi">52°</span>
+                    <span class="w-day-lo">41°</span>
+                  </div>
+                  <div class="w-day">
+                    <span class="w-day-name">SUN</span>
+                    <img class="w-day-icon" src="Haze/Assets.xcassets/icon_cloud.imageset/Cloud.png" alt="">
+                    <span class="w-day-hi">58°</span>
+                    <span class="w-day-lo">46°</span>
+                  </div>
+                  <div class="w-day">
+                    <span class="w-day-name">MON</span>
+                    <img class="w-day-icon" src="Haze/Assets.xcassets/icon_partly_cloud.imageset/PartlyCloud.png" alt="">
+                    <span class="w-day-hi">63°</span>
+                    <span class="w-day-lo">50°</span>
+                  </div>
+                  <div class="w-day">
+                    <span class="w-day-name">TUE</span>
+                    <img class="w-day-icon" src="Haze/Assets.xcassets/icon_sun.imageset/Sun.png" alt="">
+                    <span class="w-day-hi">68°</span>
+                    <span class="w-day-lo">54°</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- SCENE 4: Final card -->
+      <div class="scene-final">
+        <div class="final-icon-wrap">
+          <img src="Haze/Assets.xcassets/AppIcon.appiconset/AppIcon.png" alt="Haze">
+        </div>
+        <div class="final-title">Haze.</div>
+        <div class="final-cta">Available on the App Store</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function scaleStage() {
+      const s = document.getElementById('stage');
+      const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      s.style.transform = `scale(${scale})`;
+    }
+    scaleStage();
+    window.addEventListener('resize', scaleStage);
+  </script>
+</body>
+</html>

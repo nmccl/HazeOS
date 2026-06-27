@@ -11,6 +11,7 @@ import SwiftUI
 import MapKit
 import CoreLocation
 import Combine
+import WeatherKit
 #if canImport(UIKit)
 import UIKit
 #endif
@@ -21,8 +22,10 @@ struct LocationSelectorView: View {
     let onSelect: (CLLocation?) -> Void
 
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.openURL) private var openURL
     @StateObject private var search = CitySearch()
     @State private var query = ""
+    @State private var weatherAttribution: WeatherAttribution?
     @FocusState private var fieldFocused: Bool
 
     var body: some View {
@@ -114,11 +117,60 @@ struct LocationSelectorView: View {
                     }
                     .padding(.top, 6)
                 }
+
+                // MARK: Footer
+                HStack(spacing: 10) {
+                    if let attribution = weatherAttribution {
+                        Link(destination: attribution.legalPageURL) {
+                            AsyncImage(url: condition.isDark
+                                       ? attribution.combinedMarkDarkURL
+                                       : attribution.combinedMarkLightURL) { image in
+                                image.resizable().scaledToFit().frame(height: 10)
+                            } placeholder: {
+                                Text("APPLE WEATHER")
+                                    .fontDesign(.serif)
+                                
+                            }
+                        }
+                    } else {
+                        Button {
+                            openURL(URL(string: "https://weatherkit.apple.com/legal-attribution.html")!)
+                        } label: {
+                            Text("APPLE WEATHER")
+                                .fontDesign(.serif)
+                        }
+                    }
+                    separator
+                    Button {
+                        openURL(URL(string: "https://hazeos.info/privacy")!)
+                    } label: {
+                        Text("Privacy")
+                    }
+                    separator
+                    Button {
+                        openURL(URL(string: "https://hazeos.info/terms")!)
+                    } label: {
+                        Text("Terms")
+                    }
+                }
+                .font(.system(size: 10, weight: .bold, design: .default))
+                .foregroundStyle(Color(.black))
+                .buttonStyle(.plain)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.top, 12)
+                .padding(.bottom, 28)
             }
             .padding(.horizontal, 24)
         }
         .presentationDragIndicator(.visible)
         .onAppear { fieldFocused = true }
+        .task { weatherAttribution = try? await weatherService.attribution }
+    }
+
+    private var separator: some View {
+        Text("·")
+            .font(.system(size: 7, weight: .regular, design: .serif))
+            .foregroundStyle(condition.secondaryText.opacity(0.3))
     }
 
     // MARK: - Row
